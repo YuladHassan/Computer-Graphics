@@ -1,66 +1,70 @@
-#include <GL/gl.h>
+#include <iostream>
+#include<GL/gl.h>
 #include <GL/glut.h>
-#include<stdio.h>
-#include<math.h>
+#include <math.h>
+#include<windows.h>
+using namespace std;
 
 
-float x,y,i;
-float PI=3.1416;
+///sun
+float sun_position=7.0f;
 
-void circle(void)
+
+
+
+///sun
+void Sun()
 {
-    float x, y;
-    int i;
-    GLfloat radius;
-    int triangleAmount =40;
-    GLfloat twicePi = 2.0 * PI;
+    glPushMatrix();
+    glTranslatef(0.0,sun_position,0);
+    glBegin(GL_POLYGON);
+    glColor3ub(255, 92, 51);
+	for(int i=0;i<200;i++)
+	{
+		float pi=3.1416;
+		float A=(i*2*pi)/200;
+		float r=40;
+		float x = 620+r * cos(A);
+		float y = 930+r * sin(A);
+		glVertex2f(x,y );
+	}
+	glEnd();
+	glPopMatrix();
 
-
-
-        glBegin(GL_TRIANGLE_FAN);
-        glColor3ub(255, 165, 0);
-        x=0; y=0; radius =15;
-
-
-
-
-        twicePi = 2.0 * PI;
-
-
-
-        glVertex2f(x, y); // center of circle
-        for(i = 0; i <= triangleAmount;i++) {
-        glVertex2f(
-                    x + (radius * cos(i *  twicePi / triangleAmount)),
-                    y + (radius * sin(i * twicePi / triangleAmount))
-                  );
-        }
-
-
-
-    glEnd();
-
-
-
- glutSwapBuffers();
 }
 
-void init(void)
+void display()
 {
-    glClearColor (1.0, 1.0, 1.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
 
-    glLoadIdentity();
-    glOrtho(-100.0, 100.0, -100.0, 25.0, -1.0, 1.0);
+
+    Sun();
+
+
+
+    glFlush();
+    glutSwapBuffers();
+
 }
 
-int main(int argc,char** argv)
+
+
+void init()
 {
-glutInit(&argc,argv);
-glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE);
-glutInitWindowSize(750,550);
-glutCreateWindow("Circle");
-glutDisplayFunc(circle);
-init ();
-glutMainLoop();
-return 0;
+    glClearColor(0.0,1.0,1.0,1.0);
+	gluOrtho2D(0,1000,0,1000);
+}
+
+
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    glutInitWindowSize(1200, 600);
+    glutCreateWindow("project");
+    glutDisplayFunc(display);
+    init();
+
+
+
+    glutMainLoop();
 }
