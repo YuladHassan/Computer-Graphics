@@ -6,8 +6,7 @@
 using namespace std;
 
 
-///sun
-float sun_position=7.0f;
+
 
 
 
@@ -15,8 +14,7 @@ float sun_position=7.0f;
 ///sun
 void Sun()
 {
-    glPushMatrix();
-    glTranslatef(0.0,sun_position,0);
+
     glBegin(GL_POLYGON);
     glColor3ub(255, 92, 51);
 	for(int i=0;i<200;i++)
