@@ -1523,3 +1523,4 @@ int main(int argc, char** argv)
     glClearColor(17,1,.5,45);
     gluOrtho2D(0,1000,0,1000);
 }
+
